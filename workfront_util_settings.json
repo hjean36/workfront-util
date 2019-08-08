@@ -1,0 +1,21 @@
+{
+    "database" : {
+        "sqlite_database_path" : ""
+    }, 
+    "workfront" : {
+        "environment": "prod", 
+        "api_version": "9.0", 
+        "filters": {
+            "hour" : {
+                    "entryDate": "2019-07-01", 
+                    "entryDate_Mod": "between", 
+                    "entryDate_Range": "$$TODAYb"          
+            }
+        }, 
+        "fields" : {
+            "hour" : "*"
+
+        }
+
+    }
+}

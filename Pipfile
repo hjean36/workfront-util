@@ -10,6 +10,7 @@ requests = "*"
 aiohttp = "*"
 tenacity = "*"
 pandas = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"

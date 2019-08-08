@@ -43,7 +43,23 @@ class Defaults(Settings):
     def obj_fields(self):
         return self._fields[self.objCode]
 
+class DatabaseConfig(Settings):
+    def __init__(self):
+        Settings.__init__(self)
+        self.data = Settings._load_settings_file(self)
+        self._connection_string = self.data.get("database").get("connection_string")
+
+
+    @property
+    def connection_string(self):
+        return self._connection_string
+
+    @property
+    def sqlite_default(self): 
+        return self.data.get("database").get("sqlite_default")
+
 
 if __name__ == "__main__":
     ObjConstants()
     Defaults()
+    DatabaseConfig()
