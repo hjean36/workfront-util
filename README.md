@@ -1,9 +1,9 @@
 # workfront-util
-Simple Python library that can be used to retrieve data from the workfront api. 
+### Simple Python library that can be used to retrieve data from the workfront api. 
+---
 
-
-### Easily return all data for any objCode from the workfront api. 
-### This library uses asyncio under the hood to batch requests and return a list of dicts. 
+#### Easily return all data for any objCode from the workfront api. 
+#### This library uses asyncio under the hood to batch requests and return a list of dicts. 
 ---
 ```
 loop = asyncio.new_event_loop()
