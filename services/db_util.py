@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 
 #Local Imports
-from services.workfront import WorkfrontObj, Workfront_Api
+from services.workfront import WorkfrontAPI
 from services.settings import ObjConstants, Defaults
 
 
@@ -55,18 +55,18 @@ class DBU:
         self.metadata.create_all(self.engine)
 
 
-        def _save_data_to_db(self, objCode, count=None, filter_option=None):
+        def _save_data_to_db(self, objCode, count=None, filter=None):
             self._init_db()
             start = time.time()
     
             if count is None:
                 count = 0 #Workfront Obj will go find the max count 
             print("Fetching Data....")
-            obj_api = WorkfrontObj(version = ObjConstants().api_version, 
+            obj_api = WorkfrontAPI(version = ObjConstants().api_version, 
                                         env = ObjConstants().env, 
                                         objCode = objCode,
                                         count = count, 
-                                        filter_option = filter_option)
+                                        filter = filter)
             
             obj_data = obj_api.return_all(flat=True)   
             print("Saving data....")

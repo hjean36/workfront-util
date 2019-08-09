@@ -12,7 +12,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 import pandas as pd
 
 #Local Imports 
-from services.workfront import WorkfrontObj 
+from services.workfront import WorkfrontAPI 
 from services.settings import ObjConstants, DatabaseConfig, Defaults
 from services.db_util import DBU
 
@@ -62,24 +62,24 @@ class TestWorkfrontInterface(unittest.TestCase):
         
         
     def test_settings(self):
-        filter_option = Defaults("hour").obj_filter
-        self.assertIsNotNone(filter_option)
+        filter = Defaults("hour").obj_filter
+        self.assertIsNotNone(filter)
         hour_options = {
             "entryDate": "2019-07-01", 
             "entryDate_Mod": "between", 
             "entryDate_Range": "$$TODAYb"
             }
-        self.assertEqual(filter_option, hour_options)
+        self.assertEqual(filter, hour_options)
 
     def test_hours_save(self):
 
         #fields = ["projectID","hours","owner:ssoUsername", "entryDate", "owner:role:name", "lastUpdateDate"]
          
-        #filter_option = {'DE:Time Tracking Type_Mod': 'notblank'}
+        #filter = {'DE:Time Tracking Type_Mod': 'notblank'}
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         #Accepts parameters for fields and filter option for all data
-        hour_api = WorkfrontObj(
+        hour_api = WorkfrontAPI(
             version = ObjConstants().api_version,
             env= ObjConstants().env,
             objCode= 'hour')
