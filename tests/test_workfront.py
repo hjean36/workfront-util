@@ -72,12 +72,9 @@ class TestWorkfrontInterface(unittest.TestCase):
         self.assertEqual(filter, hour_options)
 
     def test_hours_save(self):
-
-        #fields = ["projectID","hours","owner:ssoUsername", "entryDate", "owner:role:name", "lastUpdateDate"]
-         
-        #filter = {'DE:Time Tracking Type_Mod': 'notblank'}
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
+        
         #Accepts parameters for fields and filter option for all data
         hour_api = WorkfrontAPI(
             version = ObjConstants().api_version,

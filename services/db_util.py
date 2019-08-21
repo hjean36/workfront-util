@@ -73,3 +73,7 @@ class DBU:
             obj_data.to_sql(objCode, con=self.engine,  if_exists='replace')
             duration = time.time() - start
             print('SQLAlchemy Core - total time: {:.2f} seconds'.format(duration))
+
+
+if if __name__ == "__main__":
+    DBU()

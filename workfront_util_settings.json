@@ -1,6 +1,12 @@
 {
     "database" : {
         "sqlite_database_path" : ""
+    },   
+    "SQLServer_settings": {
+        "Driver" : "", 
+        "Server" : "", 
+        "Database" : "", 
+        "Trusted_Connection": ""
     }, 
     "workfront" : {
         "environment": "prod", 

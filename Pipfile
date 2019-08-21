@@ -11,6 +11,7 @@ aiohttp = "*"
 tenacity = "*"
 pandas = "*"
 sqlalchemy = "*"
+pyodbc = "*"
 
 [requires]
 python_version = "3.7"
