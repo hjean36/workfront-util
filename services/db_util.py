@@ -75,5 +75,5 @@ class DBU:
             print('SQLAlchemy Core - total time: {:.2f} seconds'.format(duration))
 
 
-if if __name__ == "__main__":
+if __name__ == "__main__":
     DBU()
