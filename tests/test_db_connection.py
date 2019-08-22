@@ -32,10 +32,11 @@ class TestDatabase(unittest.TestCase):
 
     def test_connect_to_sql_database(self): 
             #TODO: Import test values
-            server = DatabaseConfig().server
-            database = DatabaseConfig().database
-            username = DatabaseConfig().username
-            password =   DatabaseConfig().password
+            database_settings = DatabaseConfig()
+            server = dataabse_settings.server
+            database = dataabse_settings.database
+            username = dataabse_settings.username
+            password =  dataabse_settings.password
             cnxn = pyodbc.connect('driver={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
             cursor = cnxn.cursor()
 

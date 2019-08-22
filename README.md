@@ -40,7 +40,7 @@ Control the results by configuring a workfront_util_settings.json file.
 }
 ```
 ---
-OR Add your filter options and field selections inline if prefered. 
+OR Add your filter options and field selections inline if preffered. 
 
 ```
 loop = asyncio.new_event_loop()
@@ -80,14 +80,27 @@ Set up Sqlite and MSSSQL Database Connections via the config file
             "server" : "localhost", 
             "database" : "TestDB", 
             "username" : "sa", 
-            "password" : "H129553h"
+            "password" : "myStronGPassword"
         }
     }, 
 
+```
 
+Retrieve Data from the database 
+```
+database_settings = DatabaseConfig()
+server = dataabse_settings.server
+database = dataabse_settings.database
+username = dataabse_settings.username
+password =  dataabse_settings.password
+cnxn = pyodbc.connect('driver={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+cursor = cnxn.cursor()
 
-
-
+cursor.execute("SELECT * FROM [dbo].[test_table]") 
+row = cursor.fetchone() 
+while row: 
+    print(row[0])
+    row = cursor.fetchone()
 ```
 
  
