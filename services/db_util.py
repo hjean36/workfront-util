@@ -18,7 +18,7 @@ from pathlib import Path
 
 #Local Imports
 from services.workfront import WorkfrontAPI
-from services.settings import ObjConstants, Defaults
+from services.settings import ENVSettings, Defaults
 
 
 """
@@ -62,8 +62,8 @@ class DBU:
             if count is None:
                 count = 0 #Workfront Obj will go find the max count 
             print("Fetching Data....")
-            obj_api = WorkfrontAPI(version = ObjConstants().api_version, 
-                                        env = ObjConstants().env, 
+            obj_api = WorkfrontAPI(version = ENVSettings().api_version, 
+                                        env = ENVSettings().env, 
                                         objCode = objCode,
                                         count = count, 
                                         filter = filter)

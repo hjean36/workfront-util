@@ -12,7 +12,7 @@ class Settings:
             data = json.load(json_data_file) 
             return data 
 
-class ObjConstants(Settings):
+class ENVSettings(Settings):
     def __init__(self):
         Settings.__init__(self)
         self.data = Settings._load_settings_file(self)
@@ -49,7 +49,6 @@ class DatabaseConfig(Settings):
         self.data = Settings._load_settings_file(self)
        
 
-
     @property
     def connection_string(self):
         return self.data.get("database").get("connection_string")
@@ -79,6 +78,6 @@ class DatabaseConfig(Settings):
 
 
 if __name__ == "__main__":
-    ObjConstants()
+    ENVSettings()
     Defaults()
     DatabaseConfig()

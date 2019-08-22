@@ -13,7 +13,7 @@ import pandas as pd
 
 #Local Imports 
 from services.workfront import WorkfrontAPI 
-from services.settings import ObjConstants, DatabaseConfig, Defaults
+from services.settings import ENVSettings, DatabaseConfig, Defaults
 from services.db_util import DBU
 
 
@@ -74,11 +74,11 @@ class TestWorkfrontInterface(unittest.TestCase):
     def test_hours_save(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        
+        settings = ENVSettings()
         #Accepts parameters for fields and filter option for all data
         hour_api = WorkfrontAPI(
-            version = ObjConstants().api_version,
-            env= ObjConstants().env,
+            version = settings.api_version,
+            env= settings.env,
             objCode= 'hour')
 
         hours = hour_api.return_all()

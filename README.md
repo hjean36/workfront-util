@@ -8,10 +8,11 @@
 ```
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
+settings = ENVSettings
 
 hour_api = WorkfrontObj(
-    version = ObjConstants().api_version,
-    env= ObjConstants().env,
+    version = settings.api_version,
+    env= settings.env,
     objCode= 'hour')
 
 hours = hour_api.return_all()
@@ -44,6 +45,7 @@ OR Add your filter options and field selections inline if preffered.
 ```
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
+settings = ENVSettings()
 
 filter_option = {
                     "entryDate": "2019-07-01", 
@@ -52,8 +54,8 @@ filter_option = {
             }
             
 hour_api = WorkfrontObj(
-    version = "9.0",
-    env= "prod" ,
+    version = settings.api_version,
+    env= settings.env ,
     fields = "*"
     filter_option= filter_option, 
     objCode= 'hour')
@@ -62,5 +64,30 @@ hours = hour_api.return_all()
 
 ```
 
+Return a flat pandas dataframe by passing flat=true
+
+```
+hours = hour_api.return_all(flat=True)
+```
+
+
+Set up Sqlite and MSSSQL Database Connections via the config file 
+```
+{
+    "database" : {
+        "sqlite_database_path" : "",   
+        "sql_server": {
+            "server" : "localhost", 
+            "database" : "TestDB", 
+            "username" : "sa", 
+            "password" : "H129553h"
+        }
+    }, 
+
+
+
+
+
+```
 
  
