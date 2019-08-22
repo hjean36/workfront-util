@@ -1,13 +1,13 @@
 {
     "database" : {
-        "sqlite_database_path" : ""
-    },   
-    "SQLServer_settings": {
-        "Driver" : "", 
-        "Server" : "", 
-        "Database" : "", 
-        "Trusted_Connection": ""
-    }, 
+        "sqlite_database_path" : "",   
+        "sql_server": {
+            "server" : "localhost", 
+            "database" : "TestDB", 
+            "username" : "sa", 
+            "password" : "H129553h"
+        }
+    },  
     "workfront" : {
         "environment": "prod", 
         "api_version": "9.0", 
@@ -20,7 +20,6 @@
         }, 
         "fields" : {
             "hour" : "*"
-
         }
 
     }

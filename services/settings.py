@@ -47,16 +47,35 @@ class DatabaseConfig(Settings):
     def __init__(self):
         Settings.__init__(self)
         self.data = Settings._load_settings_file(self)
-        self._connection_string = self.data.get("database").get("connection_string")
+       
 
 
     @property
     def connection_string(self):
-        return self._connection_string
+        return self.data.get("database").get("connection_string")
 
     @property
     def sqlite_default(self): 
         return self.data.get("database").get("sqlite_default")
+    
+    @property
+    def server(self): 
+        return self.data.get("database").get("sql_server").get("server")
+
+    @property
+    def username(self): 
+        return self.data.get("database").get("sql_server").get("username")
+
+    @property
+    def password(self): 
+        return self.data.get("database").get("sql_server").get("password")
+
+    @property
+    def database(self): 
+        return self.data.get("database").get("sql_server").get("database")
+
+
+    
 
 
 if __name__ == "__main__":
