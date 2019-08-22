@@ -40,7 +40,7 @@ Control the results by configuring a workfront_util_settings.json file.
 }
 ```
 ---
-OR Add your filter options and field selections inline if preffered. 
+OR Add your filter options and field selections inline if prefered. 
 
 ```
 loop = asyncio.new_event_loop()
