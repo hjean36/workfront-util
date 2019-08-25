@@ -3,14 +3,16 @@
         "sqlite_database_path" : "",   
         "sql_server": {
             "server" : "localhost", 
-            "database" : "TestDB", 
+            "prod_database" : "ProdDB",
+            "test_database" : "TestDB", 
             "username" : "sa", 
-            "password" : "H129553h"
+            "password" : "Password1"
         }
     },  
     "workfront" : {
         "environment": "prod", 
         "api_version": "9.0", 
+        "api_key" : "APIKEYDKFBDSBIVS324",
         "filters": {
             "hour" : {
                     "entryDate": "2019-07-01", 

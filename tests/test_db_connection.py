@@ -20,31 +20,20 @@ from services.db_util import DBU
 
 class TestDatabase(unittest.TestCase): 
 
-    def setUp(self): 
-        #TODO: Create test db 
-        #TODO:  Create Test Table 
-        #TODO; Create test values
-        pass 
-
+    def setUp(self):
+        self.cursor = DatabaseConfig().init_db_connection(database="TestDB")
+        self.cursor.execute("CREATE TABLE test_table ( value1 int, value2 int)")
+        self.cursor.execute("INSERT INTO test_table VALUES (1, 3)")
+   
     def tearDown(self): 
-        #Delete Test Tables 
-        pass 
+        self.cursor.execute("DROP TABLE test_table")
+        
 
-    def test_connect_to_sql_database(self): 
-            #TODO: Import test values
-            database_settings = DatabaseConfig()
-            server = dataabse_settings.server
-            database = dataabse_settings.database
-            username = dataabse_settings.username
-            password =  dataabse_settings.password
-            cnxn = pyodbc.connect('driver={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
-            cursor = cnxn.cursor()
-
-            cursor.execute("SELECT * FROM [dbo].[test_table]") 
-            row = cursor.fetchone() 
-            while row: 
-                print(row[0])
-                row = cursor.fetchone()
+    def test_connect_to_sql_database(self):   
+            self.cursor.execute("SELECT * FROM [dbo].[test_table]") 
+            row = self.cursor.fetchone() 
+            self.assertIsNotNone(row)
+                
 
 
 if __name__ == "__main__":

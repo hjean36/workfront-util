@@ -35,12 +35,12 @@ class TestWorkfrontInterface(unittest.TestCase):
         if self.database:
             os.remove(self.database)
         
-    def test_set_up_database_no_connection_string(self): 
+    def test_set_up_database_no_sqlite_connection_string(self): 
         #Import database settings 
         self.database_settings = DatabaseConfig() 
 
         #Check if user passed a connection string
-        if not self.database_settings.connection_string:
+        if not self.database_settings.sqlite_connection_string:
             if os.name == 'nt':
                 self.init_db_dir_path = os.path.join(os.environ['temp'], 'workfront')
             else:

@@ -7,7 +7,7 @@ import os
 
 #Local Library 
 from services.creds import Env
-from services.settings import Defaults
+from services.settings import Defaults, ENVSettings
 
 #Third-party imports 
 import pandas as pd
@@ -44,8 +44,9 @@ class Workfront:
     """
     
     def __init__(self, version, env):
+        self.env_settings = ENVSettings() 
         self.version = version
-        self.apiKey =  Env().workfront_api_key
+        self.apiKey = self.env_settings.api_key 
         self.env = env
 
     def _process_filter(self, options):

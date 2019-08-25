@@ -36,7 +36,7 @@ class DBU:
         self.database = ""
 
 
-    def _init_db(self, database_name, connection_string):
+    def _init_db(self, database_name, sqlite_connection_string):
         init_db_dir_path = ""
         
         #Create a workfront temp dir for the compliance database 
@@ -48,7 +48,7 @@ class DBU:
         
         #Set up the database
         self.database = os.path.join(init_db_dir_path , database_name)
-        self.engine = create_engine(connection_string, echo=False)
+        self.engine = create_engine(sqlite_connection_string, echo=False)
         self.session.remove()
         self.session.configure(bind=self.engine, autoflush=False, expire_on_commit=False)
         self.metadata.drop_all(self.engine)
