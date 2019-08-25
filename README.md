@@ -8,9 +8,9 @@
 ```
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
-settings = ENVSettings
+settings = ENVSettings()
 
-hour_api = WorkfrontObj(
+hour_api = WorkfrontAPI(
     version = settings.api_version,
     env= settings.env,
     objCode= 'hour')
@@ -53,7 +53,7 @@ filter_option = {
                     "entryDate_Range": "$$TODAYb"          
             }
             
-hour_api = WorkfrontObj(
+hour_api = WorkfrontAPI(
     version = settings.api_version,
     env= settings.env ,
     fields = "*"
