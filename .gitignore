@@ -6,3 +6,6 @@ services/creds.py
 .idea/*
 *.log
 workfront_util_settings.json
+engine.py
+web/*
+web

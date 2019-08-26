@@ -49,6 +49,14 @@ class Workfront:
         self.apiKey = self.env_settings.api_key 
         self.env = env
 
+    def create_url(environment, versionNumber):
+            url = {
+                'sandbox' : f"https://partnershealthcare.sb01.workfront.com/attask/api/v{versionNumber}",
+                'preview' : f"https://partnershealthcare.preview.workfront.com/attask/api/v{versionNumber}", 
+                'prod' : f"https://partnershealthcare.my.workfront.com/attask/api/v{versionNumber}"
+            }
+            return url.get(environment)
+
     def _process_filter(self, options):
         """
         This function pulls out filter options from a dict and returns a string for creating requests url 

@@ -12,6 +12,7 @@ tenacity = "*"
 pandas = "*"
 sqlalchemy = "*"
 pyodbc = "*"
+eel = "*"
 
 [requires]
 python_version = "3.7"

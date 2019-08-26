@@ -4,6 +4,7 @@ import pyodbc
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String,  create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+import os
 
 class Settings:
     def __init__(self): 
