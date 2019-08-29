@@ -13,6 +13,9 @@ pandas = "*"
 sqlalchemy = "*"
 pyodbc = "*"
 eel = "*"
+click = "*"
+e1839a8 = {editable = true,path = "."}
+click-config = "*"
 
 [requires]
 python_version = "3.7"

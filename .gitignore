@@ -7,5 +7,4 @@ services/creds.py
 *.log
 workfront_util_settings.json
 engine.py
-web/*
-web
+*.DS_Store

@@ -17,7 +17,7 @@ import ssl
 import aiohttp 
 from pandas.io.json import json_normalize
 import json
-
+import click
 
 class Workfront:
     """
@@ -75,6 +75,7 @@ class Workfront:
         
         return filter_string
 
+    
     @retry(wait=wait_fixed(1), stop=stop_after_attempt(2))
     async def search(self, **options):
         """
@@ -304,6 +305,7 @@ class WorkfrontAPI(Workfront):
         loop = asyncio.get_event_loop()
         loop.run_until_complete(asyncio.wait(self.request_tasks))
 
+    @click.command()
     def return_all(self, flat=False):
         """
         Returns all data for a Obj based on the initalized filters as a pandas dataframe
