@@ -8,3 +8,4 @@ services/creds.py
 workfront_util_settings.json
 engine.py
 *.DS_Store
+workfrontutil.egg-info

@@ -6,9 +6,11 @@ from sqlalchemy import Column, Integer, String,  create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import os
 
+CONFIG_FILE = ""
+
 class Settings:
     def __init__(self): 
-        self._settings_file = "workfront_util_settings.json" 
+        self._settings_file = CONFIG_FILE
 
     def _load_settings_file(self): 
         with open(self._settings_file) as json_data_file:
