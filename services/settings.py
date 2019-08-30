@@ -6,13 +6,23 @@ from sqlalchemy import Column, Integer, String,  create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import os
 
-def init(): 
-    global config_file 
-    config_file = ""
+
 
 class Settings:
     def __init__(self): 
         self._settings_file = "workfront_util_settings.json"
+    
+    def get_config():
+        config_dir_path = ""
+        if os.name == 'nt':
+                config_dir_path = os.path.join(os.environ['temp'], 'workfront')
+        else: 
+                config_dir_path = os.path.join(os.environ['TMPDIR'], 'workfront')
+        config_json =  os.path.join(config_dir_path , 'wf_config.json')
+        self._settings_file = config_json
+        return config_json
+
+
 
     def _load_settings_file(self): 
         with open(self._settings_file) as json_data_file:

@@ -34,7 +34,7 @@ Control the results by configuring a workfront_util_settings.json file.
 }
 ```
 ---
-OR Add your filter options and field selections inline if preffered. 
+OR Add your filter options and field selections inline if preferred. 
 
 ```
 loop = asyncio.new_event_loop()
@@ -71,7 +71,7 @@ Run a CLI
 Usage: workfrontutil [OPTIONS]
 
 Options:
-  --make_config TEXT  Generate config files
+  --make_config TEXT  Generate config file
   --config_path TEXT  location of config file
   --objCode TEXT      Target objCode
   --fields TEXT       Target objCode fields to return

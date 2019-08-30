@@ -41,13 +41,7 @@ def main(**kwargs):
                 path = click.echo("Generate Config file before adding additional defalts. Run --make_config")"""
        
         if kwargs.get('edit_config'):
-                config_dir_path = ""
-                if os.name == 'nt':
-                        config_dir_path = os.path.join(os.environ['temp'], 'workfront')
-                else: 
-                        config_dir_path = os.path.join(os.environ['TMPDIR'], 'workfront')
-                config_json =  os.path.join(config_dir_path , 'wf_config.json')
-                
+                config_json = settings.Settings.get_config()
                 if platform == "darwin":
                         my_cmd = f"Open /Applications/TextEdit.app {config_json}"
                         os.system(my_cmd)
