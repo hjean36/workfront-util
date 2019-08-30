@@ -74,13 +74,8 @@ class TestWorkfrontInterface(unittest.TestCase):
     def test_hours_save(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        settings = ENVSettings()
         #Accepts parameters for fields and filter option for all data
-        hour_api = WorkfrontAPI(
-            version = settings.api_version,
-            env= settings.env,
-            objCode= 'hour')
-
+        hour_api = WorkfrontAPI(objCode= 'hour')
         hours = hour_api.return_all()
         self.assertEqual(len(hours) ,  hour_api.count_of_objects)
 

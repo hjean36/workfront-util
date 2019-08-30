@@ -43,19 +43,9 @@ class Workfront:
 
     """
     
-    def __init__(self, version, env):
-        self.env_settings = ENVSettings() 
-        self.version = version
+    def __init__(self):
+        self.env_settings = ENVSettings()
         self.apiKey = self.env_settings.api_key 
-        self.env = env
-
-    def create_url(environment, versionNumber):
-            url = {
-                'sandbox' : f"https://partnershealthcare.sb01.workfront.com/attask/api/v{versionNumber}",
-                'preview' : f"https://partnershealthcare.preview.workfront.com/attask/api/v{versionNumber}", 
-                'prod' : f"https://partnershealthcare.my.workfront.com/attask/api/v{versionNumber}"
-            }
-            return url.get(environment)
 
     def _process_filter(self, options):
         """
@@ -96,7 +86,7 @@ class Workfront:
         filter_string = self._process_filter(options)
 
         "Build the url link"
-        url = Env.create_url(self.env, self.version)
+        url = self.env_settings.url
         search_url =  f"{url}/{options.get('objCode')}/search?{filter_string}&fields={options.get('fields')}"
         search_url = search_url + f"&apiKey={self.apiKey}&$$FIRST={options.get('first')}&$$LIMIT={options.get('limit')}"
 
@@ -127,7 +117,7 @@ class Workfront:
 
         """
         filter_string = self._process_filter(options)
-        url = Env.create_url(self.env, self.version)
+        url = self.env_settings.url
         search_url =  f"{url}/{options.get('objCode')}/count?{filter_string}&apiKey={self.apiKey}"
         try: 
             async with aiohttp.ClientSession() as session:
@@ -183,7 +173,7 @@ class WorkfrontAPI(Workfront):
         Number of semaphores to use for the token bucket algorithm; Default to 10 is optimal for most 
         requests sizes
     """
-    def __init__(self, version, env, objCode,  fields=None, filter=None, count=0, first=0, sems=10): 
+    def __init__(self, objCode,  fields=None, filter=None, count=0, first=0, sems=10): 
         self.objCode = objCode
         self.first = first
         self.count_of_objects = count
@@ -192,7 +182,7 @@ class WorkfrontAPI(Workfront):
         self.callSemaphore = asyncio.BoundedSemaphore(value=sems)
         self.response_data = []
         self.request_tasks = []
-        super(WorkfrontAPI, self).__init__(version, env)
+        super(WorkfrontAPI, self).__init__()
 
     def _return_filters(self, objCode=None):
         """
@@ -305,7 +295,6 @@ class WorkfrontAPI(Workfront):
         loop = asyncio.get_event_loop()
         loop.run_until_complete(asyncio.wait(self.request_tasks))
 
-    @click.command()
     def return_all(self, flat=False):
         """
         Returns all data for a Obj based on the initalized filters as a pandas dataframe

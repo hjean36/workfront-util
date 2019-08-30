@@ -3,6 +3,8 @@ from pathlib import Path
 import os 
 from services import settings
 
+os.environ["CONFIG_FILE"] = ""
+
 class WorkfrontConfig:
     def __init__(self): 
         pass
@@ -105,7 +107,7 @@ class WorkfrontConfig:
                 db_option = ""
             else: 
                 raise Exception("Invalid Db Option")
-
+            
             #Set up files 
             config_json = self._create_config(wf_env, api_key, api_version, db_option, db_settings)
             if not config_path: 
@@ -114,10 +116,14 @@ class WorkfrontConfig:
             #Dump the new config file 
             with open(config_path, 'w') as outfile:
                 json.dump(config_json, outfile)   
-
-            print(f"Config file Generatated : {config_path}")        
-            settings.CONFIG_FILE = config_path
             
+            print(f"Config file Generatated : {config_path}") 
+            os.environ["CONFIG_FILE"] = config_path      
+            settings.config_file = config_path 
+            return config_path
+            
+
+
 
 if __name__ == "__main__":
     WorkfrontConfig

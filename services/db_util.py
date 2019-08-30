@@ -27,12 +27,12 @@ TODO: Read in database settings for db name, connection string and location
 
 """
 class DBU:
-    def __init__(self):
+    def __init__(self, engine=None):
         #TODO: Get input from settings file for self.dir
         self.Base = declarative_base()
         self.metadata = self.Base.metadata
         self.session = scoped_session(sessionmaker())
-        self.engine = None
+        self.engine = engine
         self.database = ""
 
 
@@ -44,7 +44,7 @@ class DBU:
                 init_db_dir_path = os.path.join(os.environ['temp'], 'workfront')
         
         if not os.path.exists(init_db_dir_path ):
-            os.makedirs(init_db_dir_path )
+            os.makedirs(init_db_dir_path)
         
         #Set up the database
         self.database = os.path.join(init_db_dir_path , database_name)
@@ -62,12 +62,7 @@ class DBU:
             if count is None:
                 count = 0 #Workfront Obj will go find the max count 
             print("Fetching Data....")
-            obj_api = WorkfrontAPI(version = ENVSettings().api_version, 
-                                        env = ENVSettings().env, 
-                                        objCode = objCode,
-                                        count = count, 
-                                        filter = filter)
-            
+            obj_api = WorkfrontAPI(objCode = objCode) 
             obj_data = obj_api.return_all(flat=True)   
             print("Saving data....")
             obj_data.to_sql(objCode, con=self.engine,  if_exists='replace')

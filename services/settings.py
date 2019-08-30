@@ -6,11 +6,13 @@ from sqlalchemy import Column, Integer, String,  create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import os
 
-CONFIG_FILE = ""
+def init(): 
+    global config_file 
+    config_file = ""
 
 class Settings:
     def __init__(self): 
-        self._settings_file = CONFIG_FILE
+        self._settings_file = "workfront_util_settings.json"
 
     def _load_settings_file(self): 
         with open(self._settings_file) as json_data_file:
@@ -36,6 +38,16 @@ class ENVSettings(Settings):
     def api_key(self): 
         api_key = self.data.get("workfront").get("api_key")
         return api_key
+
+    @property
+    def base_url(self): 
+        base_url = self.data.get("workfront").get("base_url")
+        return base_url
+
+    @property
+    def url(self):
+            url = f"https://{self.base_url}.{self.env}.workfront.com/attask/api/v{self.api_version}"
+            return url
     
 class Defaults(Settings):
     def __init__(self, objCode):
@@ -54,7 +66,7 @@ class Defaults(Settings):
         return self._fields[self.objCode]
 
 class DatabaseConfig(Settings):
-    def __init__(self):
+    def __init__(self, db_name):
         Settings.__init__(self)
         self.data = Settings._load_settings_file(self)
         self.server = self.data.get("database").get("sql_server").get("server")
@@ -68,6 +80,7 @@ class DatabaseConfig(Settings):
         self.Base = declarative_base()
         self.metadata = self.Base.metadata
         self.session = scoped_session(sessionmaker())
+        self.db_name = db_name
     
     @property
     def sqlite_connection_string(self):
@@ -87,7 +100,7 @@ class DatabaseConfig(Settings):
             if not os.path.exists(self.init_db_dir_path ):
                 os.makedirs(self.init_db_dir_path )
 
-            self.database = os.path.join(self.init_db_dir_path , 'test.db')
+            self.database = os.path.join(self.init_db_dir_path , self.db_name)
             self.engine = create_engine(f"sqlite:///{self.database}", echo=False)
         self.session.remove()
         self.session.configure(bind=self.engine, autoflush=False, expire_on_commit=False)
@@ -116,6 +129,7 @@ class DatabaseConfig(Settings):
 
 
 if __name__ == "__main__":
+    Settings()
     ENVSettings()
     Defaults()
     DatabaseConfig()
