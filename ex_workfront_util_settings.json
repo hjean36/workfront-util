@@ -10,7 +10,8 @@
         }
     },  
     "workfront" : {
-        "environment": "prod", 
+        "base_url: "my_company",
+        "environment": "my", 
         "api_version": "9.0", 
         "api_key" : "APIKEYDKFBDSBIVS324",
         "filters": {
