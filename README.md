@@ -8,14 +8,8 @@
 ```
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
-settings = ENVSettings()
-
-hour_api = WorkfrontAPI(
-    version = settings.api_version,
-    env= settings.env,
-    objCode= 'hour')
-
-hours = hour_api.return_all()
+api = WorkfrontAPI(objCode= 'hour')
+hours = api.return_all()
 ```
 ---
 Control the results by configuring a workfront_util_settings.json file.  
@@ -53,54 +47,54 @@ filter_option = {
                     "entryDate_Range": "$$TODAYb"          
             }
             
-hour_api = WorkfrontAPI(
+api = WorkfrontAPI(
     version = settings.api_version,
     env= settings.env ,
     fields = "*"
     filter_option= filter_option, 
     objCode= 'hour')
 
-hours = hour_api.return_all()
+hours = api.return_all()
 
 ```
 
 Return a flat pandas dataframe by passing flat=true
 
 ```
-hours = hour_api.return_all(flat=True)
+hours = api.return_all(flat=True)
 ```
 
 
-Set up Sqlite and MSSSQL Database Connections via the config file 
+Run a CLI 
+
 ```
-{
-    "database" : {
-        "sqlite_database_path" : "",   
-        "sql_server": {
-            "server" : "localhost", 
-            "database" : "TestDB", 
-            "username" : "sa", 
-            "password" : "myStronGPassword"
-        }
-    }, 
+Usage: workfrontutil [OPTIONS]
+
+Options:
+  --make_config TEXT  Generate config files
+  --config_path TEXT  location of config file
+  --objCode TEXT      Target objCode
+  --fields TEXT       Target objCode fields to return
+  --filter TEXT       Target objCode filter to use
+  --edit_config TEXT  Update Config file
+  --save_obj TEXT     Save all objCode data to DB
+  --help              Show this message and exit.
 
 ```
 
-Retrieve Data from the database 
-```
-database_settings = DatabaseConfig()
-server = dataabse_settings.server
-database = dataabse_settings.database
-username = dataabse_settings.username
-password =  dataabse_settings.password
-cnxn = pyodbc.connect('driver={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
-cursor = cnxn.cursor()
+#Getting Started
 
-cursor.execute("SELECT * FROM [dbo].[test_table]") 
-row = cursor.fetchone() 
-while row: 
-    print(row[0])
-    row = cursor.fetchone()
+Install the package 
+```
+pip install workforntutil
 ```
 
- 
+Run from the cli or import into your script
+
+```
+from workfrontutil import WorkfrontAPI
+```
+
+
+
+
