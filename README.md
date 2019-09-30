@@ -82,18 +82,6 @@ Options:
 
 ```
 
-#Getting Started
-
-Install the package 
-```
-pip install workforntutil
-```
-
-Run from the cli or import into your script
-
-```
-from workfrontutil import WorkfrontAPI
-```
 
 
 
